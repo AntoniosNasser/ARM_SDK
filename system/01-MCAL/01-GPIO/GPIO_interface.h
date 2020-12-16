@@ -93,9 +93,9 @@
 
 /*	  		     Function Prototypes	 		        */
 
-void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint Copy_uint8Mode);
+void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 Copy_uint8Mode);
 
-void GPIO_voidSetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint Copy_uint8Value);
+void GPIO_voidSetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 Copy_uint8Value);
 
 uint8 GPIO_uint8GetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin);
 
