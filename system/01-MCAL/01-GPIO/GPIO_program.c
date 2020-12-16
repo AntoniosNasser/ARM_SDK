@@ -34,21 +34,17 @@ void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 C
 		{
 			GPIOA_CRL &= ~((0b1111)<<(Copy_uint8Pin*4));
 			if(Copy_uint8Mode == OUTPUT)
-				GPIOA_CRL |= ((GPIOA_OUT_MODE)<<(Copy_uint8Pin*4));
+				GPIOA_CRL |= (GPIOA_OUT_MODE) <<(Copy_uint8Pin*4) ;
 			else if (Copy_uint8Mode == INPUT)
-				GPIOA_CRL |= ((GPIOA_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
+				GPIOA_CRL |= (GPIOA_IN_MODE)<<(Copy_uint8Pin*4) ;
 		}
 		else if (Copy_uint8Pin < 16)
 		{
-			GPIOA_CRH &= ~((0b1111)<<(Copy_uint8Pin*4));
+			GPIOA_CRH &= ~((0b1111)<<((Copy_uint8Pin-8)*4));
 			if(Copy_uint8Mode == OUTPUT)
-				GPIOA_CRH |= ((GPIOA_OUT_MODE)<<(Copy_uint8Pin*4));
+				GPIOA_CRH |= ((GPIOA_OUT_MODE)<<((Copy_uint8Pin-8)*4));
 			else if (Copy_uint8Mode == INPUT)
-				GPIOA_CRH |=((GPIOA_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
+				GPIOA_CRH |=((GPIOA_IN_MODE)<<((Copy_uint8Pin-8)*4));
 		}
 		break;
 	case PORTB:
@@ -59,18 +55,14 @@ void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 C
 				GPIOB_CRL |= (GPIOB_OUT_MODE<<(Copy_uint8Pin*4));
 			else if (Copy_uint8Mode == INPUT)
 				GPIOB_CRL |= ((GPIOB_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
 		}
 		else if (Copy_uint8Pin < 16)
 		{
-			GPIOB_CRH &= ~((0b1111)<<(Copy_uint8Pin*4));
+			GPIOB_CRH &= ~((0b1111)<<((Copy_uint8Pin-8)*4));
 			if(Copy_uint8Mode == OUTPUT)
-				GPIOB_CRH |= ((GPIOB_OUT_MODE)<<(Copy_uint8Pin*4));
+				GPIOB_CRH |= ((GPIOB_OUT_MODE)<<((Copy_uint8Pin-8)*4));
 			else if (Copy_uint8Mode == INPUT)
-				GPIOB_CRH |=((GPIOB_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
+				GPIOB_CRH |=((GPIOB_IN_MODE)<<((Copy_uint8Pin-8)*4));
 		}
 		break;
 	case PORTC:
@@ -81,18 +73,14 @@ void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 C
 				GPIOC_CRL |= ((GPIOC_OUT_MODE)<<(Copy_uint8Pin*4));
 			else if (Copy_uint8Mode == INPUT)
 				GPIOC_CRL |= ((GPIOC_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
 		}
 		else if (Copy_uint8Pin < 16)
 		{
 			GPIOC_CRH &= ~((0b1111)<<(Copy_uint8Pin*4));
 			if(Copy_uint8Mode == OUTPUT)
-				GPIOC_CRH |= ((GPIOC_OUT_MODE)<<(Copy_uint8Pin*4));
+				GPIOC_CRH |= ((GPIOC_OUT_MODE)<<((Copy_uint8Pin-8)*4));
 			else if (Copy_uint8Mode == INPUT)
-				GPIOC_CRH |=((GPIOC_IN_MODE)<<(Copy_uint8Pin*4));
-			else
-			{/* Error */}
+				GPIOC_CRH |=((GPIOC_IN_MODE)<<((Copy_uint8Pin-8)*4));
 		}
 		break;
 	default: 	break;
@@ -102,7 +90,7 @@ void GPIO_voidSetPinDirection(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 C
 
 void GPIO_voidSetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 Copy_uint8Value)
 {
-		switch(Copy_uint8Port)
+	switch(Copy_uint8Port)
 	{
 	case PORTA:
 		if(Copy_uint8Value == HIGH )
@@ -140,10 +128,12 @@ void GPIO_voidSetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin, uint8 Copy_
 
 uint8 GPIO_uint8GetPinValue(uint8 Copy_uint8Port, uint8 Copy_uint8Pin)
 {
+	uint8 PinValue = 0;
 	if	(Copy_uint8Port == PORTA)
-		return GET_BIT(GPIOA_IDR,Copy_uint8Pin);
+		PinValue = GET_BIT(GPIOA_IDR,Copy_uint8Pin);
 	else if (Copy_uint8Port == PORTB)
-		return GET_BIT(GPIOB_IDR,Copy_uint8Pin);
+		PinValue = GET_BIT(GPIOB_IDR,Copy_uint8Pin);
 	else if (Copy_uint8Port == PORTC)
-		return GET_BIT(GPIOC_IDR,Copy_uint8Pin);
+		PinValue = GET_BIT(GPIOC_IDR,Copy_uint8Pin);
+	return PinValue;
 }
