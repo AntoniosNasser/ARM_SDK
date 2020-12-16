@@ -66,7 +66,7 @@ void RCC_voidMulPLL(uint8 Copy_uint8MulVal)
 	if (Copy_uint8MulVal <= 15)
 		for(int i =0 ;i<4;i++)
 		{
-			if(GET_BIT((Copy_uint8MulVal -2),i)==o)
+			if(GET_BIT((Copy_uint8MulVal -2),i)==0)
 				CLR_BIT(RCC_CFGR,18+i);
 			else
 				SET_BIT(RCC_CFGR,18+i);
